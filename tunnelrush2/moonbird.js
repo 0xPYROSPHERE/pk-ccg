@@ -2178,6 +2178,7 @@ function _emscripten_resize_heap(requestedSize) {
     return false;
 }
 function _emscripten_run_script(ptr) {
+	console.log(UTF8ToString(ptr));
     eval(UTF8ToString(ptr));
 }
 function findCanvasEventTarget(target) {
