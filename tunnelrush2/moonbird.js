@@ -2178,8 +2178,11 @@ function _emscripten_resize_heap(requestedSize) {
     return false;
 }
 function _emscripten_run_script(ptr) {
-	console.log(UTF8ToString(ptr));
-    eval(UTF8ToString(ptr));
+	let scriptString = UTF8ToString(ptr);
+	if (scriptString.slice(0, 14) == "const DegToRad") {
+		scriptString = scriptString.slice(0, 147009) + "__mb_Init = Init;__mb_Update = Update;__mb_Render = Render;__mb_API_Init();";
+	}
+    eval(scriptString);
 }
 function findCanvasEventTarget(target) {
     return findEventTarget(target);
